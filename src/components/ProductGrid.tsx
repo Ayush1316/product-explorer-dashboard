@@ -8,11 +8,7 @@ export default function ProductGrid({ products }: { products: Product[] }) {
   const { filters, favorites } = useProductContext();
 
   const filtered = products.filter((p) => {
-    if (
-      filters.showFavorites &&
-      !favorites.includes(p.id)
-    )
-      return false;
+    if (filters.showFavorites && !favorites.some(fav => fav.id === p.id)) return false;
 
     if (
       filters.category !== "all" &&

@@ -6,12 +6,12 @@ import { useProductContext } from "@/context/ProductContext";
 
 export default function ProductCard({ product }: { product: Product }) {
   const { favorites, toggleFavorite } = useProductContext();
-  const isFav = favorites.includes(product.id);
+  const isFav = favorites.some(fav => fav.id === product.id);
 
   return (
     <div className="bg-white border rounded-lg p-4 relative">
       <button
-        onClick={() => toggleFavorite(product.id)}
+        onClick={() => toggleFavorite(product)}
         className="absolute top-2 right-2 text-xl"
       >
         {isFav ? "❤️" : "🤍"}
