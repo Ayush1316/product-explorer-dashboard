@@ -41,18 +41,22 @@ const isFavorite = (productId: number) => {
 
 
   useEffect(() => {
+  if (typeof window !== "undefined") { // ✅ only run on client
     const stored = localStorage.getItem("favorites");
     if (stored) setFavorites(JSON.parse(stored));
-  }, []);
+  }
+}, []);
 
  const toggleFavorite = (product: Product) => {
   setFavorites(prev => {
-    const exists = prev.some(p => p.id === product.id); // ✅ compare by id
+    const exists = prev.some(p => p.id === product.id);
     const updated = exists
       ? prev.filter(p => p.id !== product.id)
-      : [...prev, product]; // ✅ add whole product object
+      : [...prev, product];
 
-    localStorage.setItem("favorites", JSON.stringify(updated)); // persist
+    if (typeof window !== "undefined") {
+      localStorage.setItem("favorites", JSON.stringify(updated));
+    } 
     return updated;
   });
 };
