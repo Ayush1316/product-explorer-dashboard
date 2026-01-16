@@ -1,3 +1,4 @@
+export const dynamic = "force-dynamic";
 import { getAllProducts } from "@/lib/api";
 import { ProductProvider } from "@/context/ProductContext";
 import ProductGrid from "@/components/ProductGrid";

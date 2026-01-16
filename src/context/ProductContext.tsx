@@ -34,6 +34,7 @@ export function ProductProvider({ children }: { children: React.ReactNode }) {
     category: "all",
     showFavorites: false,
   });
+  const [mounted, setMounted] = useState(false);
 
 const isFavorite = (productId: number) => {
   return favorites.some(p => p.id === productId); // compare by id
@@ -41,6 +42,7 @@ const isFavorite = (productId: number) => {
 
 
   useEffect(() => {
+    setMounted(true);
   if (typeof window !== "undefined") { // ✅ only run on client
     const stored = localStorage.getItem("favorites");
     if (stored) setFavorites(JSON.parse(stored));
@@ -60,6 +62,7 @@ const isFavorite = (productId: number) => {
     return updated;
   });
 };
+  if (!mounted) return null;
   return (
     <ProductContext.Provider
       value={{ favorites, toggleFavorite, filters, setFilters,isFavorite }}

@@ -1,5 +1,9 @@
 import "./globals.css";
-import { ProductProvider } from "@/context/ProductContext";
+import Providers from "./providers";
+
+export const metadata = {
+  title: "Product Explorer",
+};
 
 export default function RootLayout({
   children,
@@ -9,7 +13,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
-        <ProductProvider>{children}</ProductProvider>
+        <Providers>{children}</Providers>
       </body>
     </html>
   );
